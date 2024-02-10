@@ -1,0 +1,106 @@
+*/ Q 2. Write a C program which uses Binary search tree library and displays nodes at each level,
+and total levels in the tree.*/
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 30
+typedef struct node 
+{
+	int data;
+	struct node *left,*right;
+	}node;
+	struct que
+	{
+	int front,rear;
+	struct node *a[20];
+	};
+	struct que q;
+	void init()
+	{
+	q.front=q.rear=-1;
+	}
+	int isempty()
+	{
+	if(q.front==q.rear)
+	return 1;
+	else
+	return 0;
+	}
+	void add(struct node *temp)
+	{
+	q.rear++;
+	q.a[q.rear]=temp;
+	}
+	struct node *delq()
+	{
+	return (q.a[++q.front]);
+	}
+	node *create(node *root)
+	{
+	int i,n;
+	node *temp,*parent,*newnode;
+	printf("enter limit:");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+	printf("enter value:");
+	newnode=(node*)malloc(sizeof(node));
+	scanf("%d",&newnode->data);
+	newnode->left=NULL;
+	newnode->right=NULL;
+	if(root==NULL)
+	{
+	root=newnode;
+	continue;
+	}
+	temp=root;
+	while(temp!=NULL)
+	{
+	parent=temp;
+	if(newnode->data<temp->data)
+	temp=temp->left;
+	else
+	temp=temp->right;
+	}
+	if(newnode->data<parent->data)
+	parent->left=newnode;
+	else
+	parent->right=newnode;
+	}
+	return root;
+	}
+	void level(struct node *root)
+	{
+	struct node *temp;
+	int cnt=0;
+	add(root);
+	add(NULL);
+	printf("\n level=%d:\t",cnt);
+	while(!isempty())
+	{
+	temp=delq();
+	if(temp==NULL)
+	{
+	cnt++;
+	if(!isempty())
+	{
+	add(NULL);
+	printf("\n level=%d :\t",cnt);
+	}
+}
+	else
+	{
+	printf("%d\t",temp->data);
+	if(temp->left!=NULL)
+	add(temp->left);
+	if(temp->right!=NULL)
+	add(temp->right);
+	}
+}
+	printf("\n\n total level=%d",cnt);
+}
+	int main()
+	{
+	struct node *root=NULL;
+	root=create(root);
+	level(root);
+	}
