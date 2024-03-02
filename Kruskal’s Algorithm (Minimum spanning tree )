@@ -1,0 +1,64 @@
+/*Write a C program for the Implementation of Kruskal’s Minimum spanning tree algorithm.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+int i,j,k,a,b,u,v,n,ne=1;
+int min,mincost=0,cost[9][9],parent[9];
+int find(int);
+int check(int ,int);
+void main()
+{
+	printf("\n");
+	printf("Limit:\n");
+	scanf("%d",&n);
+	printf("\n Enter edges:\n");
+	for(i=1;i<=n;i++)
+	 {
+	  for(j=1;j<=n;j++)
+	   {
+	    scanf("%d",&cost[i][j]);
+	    if(cost[i][j]==0)
+	    cost[i][j]=999;
+	   }
+	 }
+	 printf("MST\n");
+	 while(ne<n)
+	 {
+	  for(i=1,min=999;i<=n;i++)
+	   {
+	    for(j=1;j<=n;j++)
+	     {
+	      if(cost[i][j]<min)
+	       {
+	        min=cost[i][j];
+	        a=u=i;
+	        b=v=j;
+	       }
+	     }
+	    }
+	    if(check(u,v)==1)
+	     {
+	       printf("%d edge(%d,%d)=%d\n",ne++,a,b,min);
+	       mincost+=min;
+	     }
+	    cost[a][b]=cost[b][a]=999;
+	    }
+	    printf("\n Minimum cost=%d\n",mincost);
+}
+int find(int i)
+{
+	while(parent[i])
+	i=parent[i];
+	return i;
+}
+int check(int i,int j)
+{
+	if(u!=v)
+	{
+	  parent[v]=u;
+	  return 1;
+	}
+	return 0;
+}    
+	     
+	     
