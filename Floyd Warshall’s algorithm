@@ -1,0 +1,40 @@
+/*Write a C program for the implementation of Floyd Warshall’s algorithm for finding all pairs
+shortest path using adjacency cost matrix.*/
+
+#include<stdio.h>
+void floyd(int a[10][10],int n)
+{
+	int i,j,k;
+	for(k=1;k<=n;k++)
+	 {
+	  for(i=1;i<=n;i++)
+	   {
+	    for(j=1;j<=n;j++)
+	     {
+	     if(a[i][k]+a[k][j]<a[i][j])
+	     {
+	       a[i][j]=a[i][k]+a[k][j];
+	     }
+	    }
+	   }
+	  }
+	  for(i=1;i<=n;i++)
+	   {
+	    for(j=1;j<=n;j++)
+	     {
+	      if(i!=j)
+	      printf("\n Distance of (%d,%d)=%d",i,j,a[i][j]);
+	     }
+	    }
+}
+int main()
+{
+	int a[10][10],n,i,j;
+	printf("Enter limit:");
+	scanf("%d",&n);
+	printf("\n Enter Matrix:");
+	 for(i=1;i<=n;i++)
+	 for(j=1;j<=n;j++)
+	    scanf("%d",&a[i][j]);
+	    floyd(a,n);
+}
