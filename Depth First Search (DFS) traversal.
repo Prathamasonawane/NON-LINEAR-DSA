@@ -1,0 +1,36 @@
+/*Write a C program that accepts the vertices and edges of a graph and store it as an
+adjacency matrix. Implement function to traverse the graph using Depth First Search (DFS)
+traversal.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+void dfs(int a[10][10],int n,int i)
+{
+	int j;
+	static int visited[10]={0};
+	visited[i]=1;
+	printf("v%d\t",i);
+	for(j=1;j<=n;j++)
+	 { 
+	   if(a[i][j]==1 && visited[j]==0)
+	   {
+	     dfs(a,n,j);
+	   }
+	 }
+}
+int main()
+{
+	int i,j,n,a[10][10];
+	printf("Enter Limit:");
+	scanf("%d",&n);
+	printf("Enter the gragh:");
+	 for(i=1;i<=n;i++)
+	  {
+	    for(j=1;j<=n;j++)
+	      {
+	        scanf("%d",&a[i][j]);
+	      }
+	   }
+	  dfs(a,n,1);
+}
+	
