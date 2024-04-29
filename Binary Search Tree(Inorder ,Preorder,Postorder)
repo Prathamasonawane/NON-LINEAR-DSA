@@ -1,3 +1,6 @@
+/*Implement a Binary search tree (BST) library (btree.h) with operations – create, insert,
+preorder. Write a menu driven program that performs the above operations.*/
+
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node
