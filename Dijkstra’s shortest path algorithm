@@ -1,0 +1,89 @@
+/*Write a C program for the implementation of Dijkstra’s shortest path algorithm for findingshortest path from a given source vertex using adjacency cost matrix.*/
+
+#include<stdio.h>
+#define INF 9999
+#define MAX 10
+ void dijkstra(int a[20][20],int n,int start);
+ 
+int main()
+{
+int a[20][20],i,j,n,u;
+printf("Enter no. of vertices:");
+scanf("%d",&n);
+printf("\nEnter the adjacency matrix:\n");
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+scanf("%d",&a[i][j]);
+printf("\nEnter the starting vertex:");
+scanf("%d",&u);
+dijkstra(a,n,u);
+return 0;
+}
+ 
+void dijkstra(int a[20][20],int n,int start)
+{
+ 
+int c[20][20],d[MAX],pred[MAX];
+int v[MAX],count,min,next,i,j;
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+if(a[i][j]==0)
+c[i][j]=INF;
+else
+c[i][j]=a[i][j];
+for(i=0;i<n;i++)
+{
+d[i]=c[start][i];
+pred[i]=start;
+v[i]=0;
+}
+d[start]=0;
+v[start]=1;
+count=1;
+while(count<n-1)
+{
+min=INF;
+for(i=0;i<n;i++)
+if(d[i]<min && !v[i])
+{
+min=d[i];
+next=i;
+}
+v[next]=1;
+for(i=0;i<n;i++)
+if(!v[i])
+if(min+c[next][i]<d[i])
+{
+d[i]=min+c[next][i];
+pred[i]=next;
+}
+count++;
+}
+for(i=0;i<n;i++)
+if(i!=start)
+{
+printf("\nDistance of Vertex%d=%d",i,d[i]);
+printf("\nPath=%d",i);
+j=i;
+do
+{
+j=pred[j];
+printf("<-%d",j);
+}while(j!=start);
+}
+}
+
+/*Enter no. of vertices:3
+
+Enter the adjacency matrix:
+0 15 40
+9999 0 10
+9999 9999 0
+
+Enter the starting vertex:0
+
+Distance of Vertex1=15
+Path=1<-0
+Distance of Vertex2=25
+Path=2<-1<-0
+*/
