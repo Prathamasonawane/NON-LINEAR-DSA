@@ -1,0 +1,84 @@
+/* Write a C program that accepts the vertices and edges of a graph. Create adjacency list.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node *next;
+};
+struct node *list[10];
+void create(int a[10][10],int n)
+{
+	struct node *temp,*newnode;
+	int i,j;
+	for(i=1;i<=n;i++)
+	{
+	  list[i]=NULL;
+	    for(j=1;j<=n;j++)
+	  {
+	    if(a[i][j]==1)
+	   {
+	newnode=(struct node*)malloc(sizeof(struct node));
+		newnode->data=j;
+		newnode->next=NULL;
+		  if(list[i]==NULL)
+		    {
+		      list[i]=temp=newnode;
+		    }
+		  else
+		    {
+		      temp->next=newnode;
+		      temp=newnode;
+		    }
+	      }
+	   }
+	}
+	printf("\n Adjacency List:\n");
+}
+void display(int n)
+{
+	struct node *temp;
+	int i;
+	for(i=1;i<=n;i++)
+	  {
+	    printf("\n List%d->",i);
+	    for(temp=list[i];temp!=NULL;temp=temp->next)
+	      {
+	        printf("%d->",temp->data);
+	       }
+	       printf("NULL\n");
+	    }
+}
+int main()
+{
+	int a[10][10],i,j,n;
+	printf(" Enter N vertices:");
+	scanf("%d",&n);
+	printf("Enter Edges in the form of matrix:");
+	  for(i=1;i<=n;i++)
+	    for(j=1;j<=n;j++)
+	      {
+	      scanf("%d",&a[i][j]);
+	      }
+	     create(a,n);
+	     display(n);
+}		      
+/*
+Enter N vertices:4
+Enter Edges in the form of matrix:
+0 0 1 0
+1 1 0 1
+0 1 0 1
+1 0 1 0
+
+ Adjacency List:
+
+ List1->3->NULL
+
+ List2->1->2->4->NULL
+
+ List3->2->4->NULL
+
+ List4->1->3->NULL
+*/	
