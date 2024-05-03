@@ -1,0 +1,47 @@
+/*Write a C program that accepts the vertices and edges of a graph and stores it as an
+adjacency matrix. Display the adjacency matrix.*/
+
+#include<stdio.h>
+void main()
+{
+	int a[10][10],i,n,j;
+	printf("enter the number of vertex:");
+	scanf("%d",&n);
+	printf("enter adjacency matrix:");
+	for(i=1;i<=n;i++)
+	{
+	for(j=1;j<=n;j++)
+	{
+	a[i][j]=0;
+	if(i!=j)
+	{
+	scanf("%d",&a[i][j]);
+	}
+}
+}
+	printf("\n The adjacency matrix:\n");
+	for(i=1;i<=n;i++)
+	{
+	printf("\tV%d",i);
+	}
+	for(i=1;i<=n;i++)
+	{
+	printf("\nV%d",i);
+	for(j=1;j<=n;j++)
+	printf("\t%d",a[i][j]);
+	}
+	printf("\n");
+}
+
+/*
+enter the number of vertex:3
+enter adjacency matrix:
+1 1 0
+0 1 1
+
+ The adjacency matrix:
+	V1	V2	V3
+V1	0	1	1
+V2	0	0	0
+V3	1	1	0
+*/
